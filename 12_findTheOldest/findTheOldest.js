@@ -56,7 +56,30 @@ const findProperty = (obj, propName) => {
   return false
 };
 
+// Set a certain property for an object when a certain object cannot be found
+const setProperty = (obj, propName, propValue) => {
+  obj[`${propName}`] = propValue;
+};
 
+const findTheOldest = function(arr) {
+
+  for (let i = 0; i < arr.length; i += 1) {
+    if (!findProperty(arr[i], 'yearOfDeath')) {
+      setProperty(arr[i], 'yearOfDeath', new Date().getFullYear());
+    }
+  }
+
+  let oldest;
+  const ages = [];
+
+  for (let i = 0; i < arr.length; i += 1) {
+    ages.push(arr[i].yearOfDeath - arr[i].yearOfBirth);
+    if (arr[i].yearOfDeath - arr[i].yearOfBirth === getMax(ages)) {
+      oldest = arr[i];
+    }
+  }
+  return oldest;
+};
 
 // Do not edit below this line
 module.exports = findTheOldest;
